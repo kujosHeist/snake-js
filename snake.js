@@ -6,14 +6,12 @@ function Snake() {
 	this.yspeed = 0;
 
 	this.gameOver = false;
-
-
-	this.prevPosition = [createVector(this.x, this.y), createVector(this.x, this.y), createVector(this.x, this.y), createVector(this.x, this.y), createVector(this.x, this.y)];
+	this.tail = createTail(6)
 
 	this.eat = function(pos) {
 		var d = dist(this.x, this.y, pos.x, pos.y);
 		if(d < 1){
-			this.prevPosition.push(createVector(this.x, this.y))
+			this.addTail(3);
 			return true;
 
 		}else{
@@ -30,14 +28,10 @@ function Snake() {
 
 	this.update = function() {
 
-		
-
-		if(this.prevPosition.length > 0){
-			this.prevPosition.splice(0, 1);	
-			this.prevPosition.push(createVector(this.x, this.y))			
-			
+		if(this.tail.length > 0){
+			this.tail.splice(0, 1);	
+			this.tail.push(createVector(this.x, this.y))				
 		}
-
 
 		this.x = this.x + this.xspeed * scl;
 		this.y = this.y + this.yspeed * scl;
@@ -58,8 +52,8 @@ function Snake() {
 			this.y = height-scl;
 		}
 
-		for (var i = 0; i < this.prevPosition.length; i++) {
-			if(this.prevPosition[i].equals(createVector(this.x, this.y))){
+		for (var i = 0; i < this.tail.length; i++) {
+			if(this.tail[i].equals(createVector(this.x, this.y))){
 				this.gameOver = true;
 			}
 		}	
@@ -73,8 +67,8 @@ function Snake() {
 	this.show = function() {
 		fill(255);
 
-		for (var i = 0; i < this.prevPosition.length; i++) {
-			rect(this.prevPosition[i].x, this.prevPosition[i].y, scl, scl);
+		for (var i = 0; i < this.tail.length; i++) {
+			rect(this.tail[i].x, this.tail[i].y, scl, scl);
 		}
 
 		if(this.gameOver){
@@ -83,8 +77,23 @@ function Snake() {
 			}else{
 				rect(this.x, this.y, scl, scl);		
 			}
-		
-		
 	}
+
+	function createTail(tailLength){
+		var tail = [];
+		for(var i = 0; i < tailLength; i++){
+			tail.push(createVector(this.x, this.y))
+		}
+
+		return tail;
+	}
+
+	this.addTail = function(tailLength){
+
+		for(var i = 0; i < tailLength; i++){
+			this.tail.push(createVector(this.x, this.y))
+		}		
+		
+	}	
 
 }

@@ -1,11 +1,14 @@
 var s;
 var scl = 20;
 var food;
+var score = 0;
 
 function setup() {
-	createCanvas(600, 600);
+	var canvas = createCanvas(600, 600);
+	canvas.parent("sketch-div")
+
 	s = new Snake();
-	frameRate(10);
+	frameRate(20);
 
 	pickLocation();
 }
@@ -29,11 +32,17 @@ function draw() {
 	s.show();
 
 	if(s.eat(food)){
-		pickLocation()
+		pickLocation();
+		updateScore();
 	}
 
 	fill(255, 0, 100);
 	rect(food.x, food.y, scl, scl);
+}
+
+function updateScore(){
+	score += 9;
+	document.getElementById("score-span").innerText = score;
 }
 
 

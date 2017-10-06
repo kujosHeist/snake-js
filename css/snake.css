@@ -1,0 +1,19 @@
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 40px;
+}
+
+#sketch-div{
+	float: left;
+}
+
+#menu-div{
+	float: left;
+	border: 5px black solid;
+	border-radius: 5px;
+}
+
+
+#score-div{
+	padding: 10px;
+}

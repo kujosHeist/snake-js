@@ -1,0 +1,8 @@
+* Add start game button
+* Add game over message
+* Add play again button
+* Keep track of top scores (per session)
+* Allow user to save name with top score
+* Fix bug where snake can do 180 degree turn if buttons pressed quick enough
+* Fix food being generated in snakes tail
+* Add animation on game over where snake tail blocks fall to bottom of screen (combine with other videos)
