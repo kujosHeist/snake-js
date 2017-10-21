@@ -3,12 +3,32 @@ var scl = 20;
 var food;
 var score = 0;
 
+
+var gameState = "off";
+var gameStarted = false;
+
+$(document).ready(function(){
+	$("#start-game").on('click', toggleButton);
+});
+
+function toggleButton(){
+	if(gameState == "off"){
+		gameStarted = true;
+		gameState = "on";
+		$("#start-game").html("Pause");
+	}else{
+		gameStarted = false;
+		gameState = "off";		
+		$("#start-game").html("Start");
+	}
+}
+
 function setup() {
 	var canvas = createCanvas(600, 600);
 	canvas.parent("sketch-div")
 
 	s = new Snake();
-	frameRate(20);
+	frameRate(10);
 
 	pickLocation();
 }
@@ -25,7 +45,7 @@ function pickLocation() {
 function draw() {
 	background(51);
 
-	if(!s.gameOver){
+	if(gameStarted && !s.gameOver){
 		s.update();	
 	}
 	
@@ -63,6 +83,5 @@ function keyPressed() {
 		if(s.yspeed != 0){
 			s.dir(-1, 0);	
 		}
-		
 	}
 }
